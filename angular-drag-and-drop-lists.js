@@ -384,7 +384,7 @@
         var mimeType = getMimeType(event.dataTransfer.types);
         var itemType = getItemType(mimeType);
         if (!mimeType || !isDropAllowed(itemType)) {
-		console.debug ('drop not allowed: ', mimeType);
+		console.debug ('drop not allowed: ', mimeType, itemType);
 		return true;
 	}
 
@@ -496,11 +496,9 @@
 		return false;
 	}
         if (!listSettings.allowedTypes || itemType === null) {
-		console.debug ('drop not allowed: allowed types not defined or itemType is null');
 		return true;
 	}
 
-	console.debug ('drop allowed: ', itemType && listSettings.allowedTypes.indexOf(itemType) != -1);
         return itemType && listSettings.allowedTypes.indexOf(itemType) != -1;
       }
 
