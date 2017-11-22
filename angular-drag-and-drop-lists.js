@@ -299,7 +299,10 @@
         };
 
         var mimeType = getMimeType(event.dataTransfer.types);
-        if (!mimeType || !isDropAllowed(getItemType(mimeType))) return true;
+        if (!mimeType || !isDropAllowed(getItemType(mimeType))) {
+		console.debug ('dragenter: not allowed: ', mimeType);
+		return true;
+	}
         event.preventDefault();
       });
 
@@ -313,7 +316,10 @@
         // Check whether the drop is allowed and determine mime type.
         var mimeType = getMimeType(event.dataTransfer.types);
         var itemType = getItemType(mimeType);
-        if (!mimeType || !isDropAllowed(itemType)) return true;
+        if (!mimeType || !isDropAllowed(itemType)) {
+		console.debug ('dragover: not allowed', mimeType);
+		return true;
+	}
 
         // Make sure the placeholder is shown, which is especially important if the list is empty.
         if (placeholderNode.parentNode != listNode) {
@@ -377,7 +383,10 @@
         // Check whether the drop is allowed and determine mime type.
         var mimeType = getMimeType(event.dataTransfer.types);
         var itemType = getItemType(mimeType);
-        if (!mimeType || !isDropAllowed(itemType)) return true;
+        if (!mimeType || !isDropAllowed(itemType)) {
+		console.debug ('drop not allowed: ', mimeType);
+		return true;
+	}
 
         // The default behavior in Firefox is to interpret the dropped element as URL and
         // forward to it. We want to prevent that even if our drop is aborted.
