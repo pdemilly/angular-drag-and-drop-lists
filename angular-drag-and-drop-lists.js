@@ -95,7 +95,10 @@
         event = event.originalEvent || event;
 
         // Check whether the element is draggable, since dragstart might be triggered on a child.
-        if (element.attr('draggable') == 'false') return true;
+        if (element.attr('draggable') == 'false') {
+		console.debug ('dragstart: not draggable');
+		return true;
+	}
 
         // Initialize global state.
         dndState.isDragging = true;
@@ -110,6 +113,9 @@
         // https://github.com/marceljuenemann/angular-drag-and-drop-lists/wiki/Data-Transfer-Design
         var item = scope.$eval(attr.dndDraggable);
         var mimeType = MIME_TYPE + (dndState.itemType ? ('-' + dndState.itemType) : '');
+
+	console.debug ('dragstart: started', dndState, item, mimeType);
+
         try {
           event.dataTransfer.setData(mimeType, angular.toJson(item));
         } catch (e) {
