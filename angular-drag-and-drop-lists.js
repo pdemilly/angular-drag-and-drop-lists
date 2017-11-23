@@ -91,7 +91,9 @@
        * When the drag operation is started we have to prepare the dataTransfer object,
        * which is the primary way we communicate with the target element
        */
+      console.debug ('dndDraggable: register dragstart', element);
       element.on('dragstart', function(event) {
+	console.debug ('dragstart called:', event);
         event = event.originalEvent || event;
 
         // Check whether the element is draggable, since dragstart might be triggered on a child.
@@ -149,6 +151,7 @@
           dndState.callback = function(params) { return callback(scope, params || {}); };
         }
 
+	console.debug ('dndDraggable: ready', dndState);
         event.stopPropagation();
       });
 
@@ -157,6 +160,7 @@
        * operation was aborted (e.g. hit escape button). Depending on the executed action
        * we will invoke the callbacks specified with the dnd-moved or dnd-copied attribute.
        */
+	console.debug ('dndDraggable: register dragend', element);
       element.on('dragend', function(event) {
         event = event.originalEvent || event;
 
@@ -186,6 +190,7 @@
        * When the element is clicked we invoke the callback function
        * specified with the dnd-selected attribute.
        */
+	console.debug ('dndDraggable: register click', element);
       element.on('click', function(event) {
         if (!attr.dndSelected) return;
 
@@ -201,9 +206,11 @@
       /**
        * Workaround to make element draggable in IE9
        */
+	console.debug ('dndDraggable: register selectstart', element);
       element.on('selectstart', function() {
         if (this.dragDrop) this.dragDrop();
       });
+	console.debug ('dndDraggable: end registering events', element);
     };
   }]);
 
